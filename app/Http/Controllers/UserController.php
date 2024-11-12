@@ -24,7 +24,6 @@ class UserController extends Controller
     public function index()
     {
         $users = $this->userRepository->all();
-        dd($users);
         return response()->json([
             'data' => UserResource::collection($users->load('media')),
         ]);
@@ -71,11 +70,12 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = $this->userRepository->find($id);
-
-        return response()->json([
-            'data' => new UserResource($user),
-        ]);
+        $user = $this->userRepository->find($id)->load('media');
+        // dd($user);
+        return new UserResource($user);
+        //  response()->json([
+        //     'data' => new UserResource($user),
+        // ]);
     }
 
     /**

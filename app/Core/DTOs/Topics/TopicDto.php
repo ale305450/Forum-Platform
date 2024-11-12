@@ -2,7 +2,7 @@
 
 namespace app\Core\DTOs\Topics;
 
-class UpdateTopicDto
+class TopicDto
 {
     public string $title;
     public string $description;

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Users;
+namespace App\Http\Requests\Topics;
 
-use app\Core\DTOs\Users\RegisterDto;
+use app\Core\DTOs\Topics\TopicDto;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 
-class RegisterRequest extends FormRequest
+class TopicRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,13 +25,10 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'email', 'unique:users'],
-            'name' => ['required', 'min:3'],
-            'password' => ['required'],
-            'profile_picture' => ['file', 'mimes:png,jpg']
+            'title' => ['required', 'min:5'],
+            'description' => ['required', 'min:20'],
         ];
     }
-
     /**
      * Get the validation errors that may accure in the request.
      *
@@ -50,8 +47,8 @@ class RegisterRequest extends FormRequest
      *
      */
 
-    public function toDto(): RegisterDto
+    public function toDto(): TopicDto
     {
-        return new RegisterDto($this->name, $this->email, $this->password, $this->file('profile_picture'));
+        return new TopicDto($this->title, $this->description);
     }
 }
