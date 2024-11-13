@@ -12,6 +12,8 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\QueryBuilder\AllowedFilter;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class UserRepository implements UserRepositoryInterface
 {
@@ -77,8 +79,7 @@ class UserRepository implements UserRepositoryInterface
 
         if ($updateUserDto->profile_picture != null) {
             $oldImage = $user->getFirstMedia('profile_images');
-            if($oldImage != null)
-            {
+            if ($oldImage != null) {
                 $oldImage->delete();
             }
             // Add media if an image is included in the DTO
@@ -87,5 +88,19 @@ class UserRepository implements UserRepositoryInterface
             }
         }
         return $user;
+    }
+    public function filter(Request $request)
+    {
+        $query = QueryBuilder::for(User::class)
+            ->allowedFilters([
+                AllowedFilter::exact('name')
+            ]);
+
+        if ($request->filled('name')) {
+            $query->where('name', $request->name);
+        }
+
+        $users = $query->get();
+        return $users;
     }
 }

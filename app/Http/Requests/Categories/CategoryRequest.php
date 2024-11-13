@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Topics;
+namespace App\Http\Requests\Categories;
 
-use app\Core\DTOs\Topics\TopicDto;
+use app\Core\DTOs\Categories\CategoryDto;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 
-class TopicRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,7 @@ class TopicRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'min:5'],
-            'description' => ['required', 'min:20'],
+            'name' => ['required', 'string']
         ];
     }
     /**
@@ -47,8 +46,8 @@ class TopicRequest extends FormRequest
      *
      */
 
-    public function toDto(): TopicDto
+    public function toDto(): CategoryDto
     {
-        return new TopicDto($this->title, $this->description,array($this->category_id));
+        return new CategoryDto($this->name);
     }
 }

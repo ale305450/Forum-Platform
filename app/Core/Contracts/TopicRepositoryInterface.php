@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 
 interface TopicRepositoryInterface extends RepositoryInterface
 {
-    public function create(TopicDto $loginDto);
-    public function update($id, TopicDto $updateUserDto);
+    public function create(TopicDto $topicDto);
+    public function update($id, TopicDto $topicDto);
 }

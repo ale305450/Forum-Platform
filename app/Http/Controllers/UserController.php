@@ -97,4 +97,16 @@ class UserController extends Controller
 
         return response()->json(['message' => 'user deleted']);
     }
+
+    /**
+     * Filter the users by the name.
+     */
+    public function filter(Request $request)
+    {
+        $users = $this->userRepository->filter($request);
+
+        return response()->json([
+            'filterd users' => $users
+        ]);
+    }
 }

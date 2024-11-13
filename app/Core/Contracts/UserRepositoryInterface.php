@@ -15,4 +15,5 @@ interface UserRepositoryInterface extends RepositoryInterface
     public function update($id, UpdateUserDto $updateUserDto);
     public function logout(Request $request);
     public function findByEmail($email);
+    public function filter(Request $request);
 }

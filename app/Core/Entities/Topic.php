@@ -17,4 +17,9 @@ class Topic extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'topic_category');
+    }
 }
