@@ -16,4 +16,5 @@ interface UserRepositoryInterface extends RepositoryInterface
     public function logout(Request $request);
     public function findByEmail($email);
     public function filter(Request $request);
+    public function search(Request $request);
 }

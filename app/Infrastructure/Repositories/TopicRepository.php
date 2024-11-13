@@ -8,6 +8,7 @@ use App\Core\Entities\Topic;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class TopicRepository implements TopicRepositoryInterface
 {
@@ -28,24 +29,28 @@ class TopicRepository implements TopicRepositoryInterface
             'description' => $topicDto->description,
             'user_id' => $user_id
         ]);
-        
+
         $topic->categories()->attach($topicDto->category_id);
         return $topic;
     }
     public function update($id, TopicDto $topicDto)
     {
         $topic = $this->find($id);
+        Gate::authorize('creator', $topic);
 
         $topic->update([
             'title' => $topicDto->title,
             'description' => $topicDto->description,
         ]);
 
+        $topic->categories()->sync($topicDto->category_id);
         return $topic;
     }
     public function delete($id)
     {
         $topic = $this->find($id);
+        Gate::authorize('creator', $topic);
+        $topic->categories()->detach();
         $topic->delete();
     }
 }

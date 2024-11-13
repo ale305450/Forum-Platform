@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Core\Contracts\CategoryRepositoryInterface;
-use App\Http\Requests\Categories\CategoryRequest;
+use App\Http\Requests\Categories\CreateCategoryRequest;
+use App\Http\Requests\Categories\UpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -31,7 +32,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created category in storage.
      */
-    public function store(CategoryRequest $request)
+    public function store(CreateCategoryRequest $request)
     {
         $category = $this->categoryRepository->create($request->toDto());
 
@@ -55,7 +56,7 @@ class CategoryController extends Controller
     /**
      * Update the specified category in storage.
      */
-    public function update(CategoryRequest $request, $id)
+    public function update(UpdateCategoryRequest $request, $id)
     {
         $category = $this->categoryRepository->update($id, $request->toDto());
 

@@ -109,4 +109,16 @@ class UserController extends Controller
             'filterd users' => $users
         ]);
     }
+
+    /**
+     * search the users by the name.
+     */
+    public function search(Request $request)
+    {
+        $users = $this->userRepository->search($request);
+
+        return response()->json([
+            'searched users' => $users
+        ]);
+    }
 }

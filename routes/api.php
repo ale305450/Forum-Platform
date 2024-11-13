@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('user/{id}', [UserController::class, 'destroy']);
     Route::post('user/{id}', [UserController::class, 'update']);
     Route::post('user/filter', [UserController::class, 'filter']);
+    Route::post('user/search', [UserController::class, 'filter']);
 
     //Route::resource('topic',TopicController::class);
     Route::prefix('topic')->group(function () {

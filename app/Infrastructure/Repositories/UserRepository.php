@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -33,7 +34,6 @@ class UserRepository implements UserRepositoryInterface
     }
     public function register(RegisterDto $registerDto)
     {
-
         $user = User::create([
             'name' => $registerDto->name,
             'email' => $registerDto->email,
@@ -72,6 +72,7 @@ class UserRepository implements UserRepositoryInterface
     public function update($id, UpdateUserDto $updateUserDto)
     {
         $user = User::findOrFail($id);
+        Gate::authorize('modify', $user);
         $user->update([
             'name' => $updateUserDto->name,
             'password' => $updateUserDto->password,
@@ -97,10 +98,17 @@ class UserRepository implements UserRepositoryInterface
             ]);
 
         if ($request->filled('name')) {
-            $query->where('name', $request->name);
+            $query->where('name', $request->name)->paginate(2);
         }
 
         $users = $query->get();
+        return $users;
+    }
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $users = User::where('name', 'like', "%$search%")->get();
+
         return $users;
     }
 }
