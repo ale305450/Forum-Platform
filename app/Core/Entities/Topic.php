@@ -2,6 +2,7 @@
 
 namespace App\Core\Entities;
 
+use App\Core\Entities\Response;
 use Illuminate\Database\Eloquent\Model;
 
 class Topic extends Model
@@ -21,5 +22,10 @@ class Topic extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'topic_category');
+    }
+
+    public function responses()
+    {
+        return $this->hasMany(Response::class);
     }
 }

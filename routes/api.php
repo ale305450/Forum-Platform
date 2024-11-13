@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ResponseController;
 use App\Http\Controllers\TopicController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -20,10 +21,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [UserController::class, 'logout']);
 
     Route::middleware('role:admin')->group(function () {});
-    Route::get('users', [UserController::class, 'index']);
-    Route::get('user/{id}', [UserController::class, 'show']);
-    Route::delete('user/{id}', [UserController::class, 'destroy']);
-    Route::post('user/{id}', [UserController::class, 'update']);
+    // Route::get('users', [UserController::class, 'index']);
+    // Route::get('user/{id}', [UserController::class, 'show']);
+    // Route::delete('user/{id}', [UserController::class, 'destroy']);
+    // Route::post('user/{id}', [UserController::class, 'update']);
     Route::post('user/filter', [UserController::class, 'filter']);
     Route::post('user/search', [UserController::class, 'filter']);
 
@@ -42,5 +43,13 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{id}', [CategoryController::class, 'show']);
         Route::post('/{id}', [CategoryController::class, 'update']);
         Route::delete('/{id}', [CategoryController::class, 'destroy']);
+    });
+
+    Route::prefix('response')->group(function () {
+        Route::get('', [ResponseController::class, 'index']);
+        Route::post('', [ResponseController::class, 'store']);
+        Route::get('/{id}', [ResponseController::class, 'show']);
+        Route::post('/{id}', [ResponseController::class, 'update']);
+        Route::delete('/{id}', [ResponseController::class, 'destroy']);
     });
 });

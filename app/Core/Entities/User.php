@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Core\Entities\Response;
 use Spatie\Permission\Traits\HasRoles;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -59,5 +60,10 @@ class User extends Authenticatable  implements HasMedia
     public function topics()
     {
         return $this->hasMany(Topic::class);
+    }
+
+    public function responses()
+    {
+        return $this->hasMany(Response::class);
     }
 }
