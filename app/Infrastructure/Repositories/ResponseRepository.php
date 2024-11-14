@@ -19,7 +19,6 @@ class ResponseRepository implements ResponseRepositoryInterface
 
     public function create(CreateResponseDto $responseDto)
     {
-        dd( $responseDto);
         $user_id = Auth::user()->id;
         $response = Response::create([
             'user_id' => $user_id,

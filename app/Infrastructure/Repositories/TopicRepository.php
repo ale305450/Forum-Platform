@@ -22,7 +22,6 @@ class TopicRepository implements TopicRepositoryInterface
     }
     public function create(TopicDto $topicDto)
     {
-        //dd($topicDto->category_id);
         $user_id = Auth::user()->id;
         $topic = Topic::create([
             'title' => $topicDto->title,

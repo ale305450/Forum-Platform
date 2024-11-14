@@ -48,6 +48,6 @@ class UpdateResponseRequest extends FormRequest
 
     public function toDto(): UpdateResponseDto
     {
-        return new UpdateResponseDto($this->content);
+        return new UpdateResponseDto($this->input('content'));
     }
 }

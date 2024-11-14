@@ -21,12 +21,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [UserController::class, 'logout']);
 
     Route::middleware('role:admin')->group(function () {});
-    // Route::get('users', [UserController::class, 'index']);
-    // Route::get('user/{id}', [UserController::class, 'show']);
-    // Route::delete('user/{id}', [UserController::class, 'destroy']);
-    // Route::post('user/{id}', [UserController::class, 'update']);
+    Route::get('users', [UserController::class, 'index']);
+    Route::get('user/{id}', [UserController::class, 'show']);
+    Route::delete('user/{id}', [UserController::class, 'destroy']);
+    Route::patch('user/{id}', [UserController::class, 'update']);
     Route::post('user/filter', [UserController::class, 'filter']);
-    Route::post('user/search', [UserController::class, 'filter']);
+    Route::post('user/search', [UserController::class, 'search']);
 
     //Route::resource('topic',TopicController::class);
     Route::prefix('topic')->group(function () {

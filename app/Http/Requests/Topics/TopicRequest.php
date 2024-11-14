@@ -49,6 +49,6 @@ class TopicRequest extends FormRequest
 
     public function toDto(): TopicDto
     {
-        return new TopicDto($this->title, $this->description,array($this->category_id));
+        return new TopicDto($this->title, $this->description,$this->category_id);
     }
 }

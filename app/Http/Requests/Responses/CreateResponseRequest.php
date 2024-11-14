@@ -50,6 +50,6 @@ class CreateResponseRequest extends FormRequest
 
     public function toDto(): CreateResponseDto
     {
-        return new CreateResponseDto($this->topic_id, $this->content, $this->parent_id);
+        return new CreateResponseDto($this->topic_id, $this->input('content'), $this->parent_id);
     }
 }
