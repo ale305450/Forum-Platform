@@ -84,4 +84,18 @@ class ResponseController extends Controller
             ]
         );
     }
+
+    /**
+     * Remove the specified response from storage.
+     */
+    public function topicResponses($topic_id)
+    {
+        $responses = $this->responseRepository->topicResponses($topic_id);
+
+        return response()->json(
+            [
+                'data' =>  ResponseResource::collection($responses)
+            ]
+        );
+    }
 }

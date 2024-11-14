@@ -11,4 +11,5 @@ interface ResponseRepositoryInterface extends RepositoryInterface
 {
     public function create(CreateResponseDto $responseDto);
     public function update($id, UpdateResponseDto $responseDto);
+    public function topicResponses($topic_id);
 }

@@ -16,12 +16,31 @@ class RoleSeeder extends Seeder
         //Create admin role and assgin permission to it
         $admin = Role::create(['name' => 'Admin']);
 
-        $admin->givePermissionTo([]);
+        $admin->givePermissionTo([
+            'create-category',
+            'update-category',
+            'delete-category',
+            'all-topics',
+            'all-users',
+            'find-user',
+            'show-user',
+            'delete-user',
+        ]);
 
         //Create user role and assgin permission to it
 
         $user = Role::create(['name' => 'User']);
 
-        $user->givePermissionTo([]);
+        $user->givePermissionTo([
+            'create-response',
+            'update-response',
+            'delete-response',
+            'all-topics',
+            'create-topic',
+            'update-topic',
+            'delete-topic',
+            'find-user',
+            'show-user',
+        ]);
     }
 }

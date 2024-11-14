@@ -10,4 +10,6 @@ interface TopicRepositoryInterface extends RepositoryInterface
 {
     public function create(TopicDto $topicDto);
     public function update($id, TopicDto $topicDto);
+    public function search(Request $request);
+    public function filter(Request $request);
 }

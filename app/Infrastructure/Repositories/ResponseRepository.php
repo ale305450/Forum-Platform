@@ -17,6 +17,13 @@ class ResponseRepository implements ResponseRepositoryInterface
         return Response::with(['user', 'topic', 'parent', 'replies'])->get();
     }
 
+    public function topicResponses($topic_id)
+    {
+        $responses = Response::with(['user', 'topic', 'parent', 'replies'])
+            ->where('topic_id', '=', $topic_id)->get();
+
+        return $responses;
+    }
     public function create(CreateResponseDto $responseDto)
     {
         $user_id = Auth::user()->id;

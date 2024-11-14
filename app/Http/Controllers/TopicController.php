@@ -75,4 +75,28 @@ class TopicController extends Controller
             'message' => 'topic deleted succsfully'
         ]);
     }
+
+    /**
+     * search the topics.
+     */
+    public function search(Request $request)
+    {
+        $topics = $this->topicRepository->search($request);
+
+        return response()->json([
+            'data' => TopicResource::collection($topics)
+        ]);
+    }
+
+    /**
+     * filter the topics.
+     */
+    public function filter(Request $request)
+    {
+        $topics = $this->topicRepository->filter($request);
+
+        return response()->json([
+            'data' => TopicResource::collection($topics)
+        ]);
+    }
 }
