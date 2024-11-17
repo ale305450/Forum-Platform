@@ -44,7 +44,7 @@ class UserRepository implements UserRepositoryInterface
         if (isset($registerDto->profile_picture) && $registerDto->profile_picture instanceof UploadedFile) {
             $user->addMedia($registerDto->profile_picture)->toMediaCollection('profile_images');
         }
-        //$user->assignRole('user');
+        $user->assignRole('User');
         return $user;
     }
     public function login(LoginDto $loginDto): string

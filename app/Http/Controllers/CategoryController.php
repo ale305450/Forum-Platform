@@ -6,7 +6,6 @@ use App\Core\Contracts\CategoryRepositoryInterface;
 use App\Http\Requests\Categories\CreateCategoryRequest;
 use App\Http\Requests\Categories\UpdateCategoryRequest;
 use App\Http\Resources\CategoryResource;
-use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller

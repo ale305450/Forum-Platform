@@ -5,6 +5,8 @@ namespace app\Infrastructure\Repositories;
 use App\Core\Contracts\TopicRepositoryInterface;
 use app\Core\DTOs\Topics\TopicDto;
 use App\Core\Entities\Topic;
+use App\Events\SendNewTopicNotificationEvent;
+use App\Jobs\SendTopicCreatedMail;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -24,14 +26,16 @@ class TopicRepository implements TopicRepositoryInterface
     }
     public function create(TopicDto $topicDto)
     {
-        $user_id = Auth::user()->id;
+        $user = Auth::user();
         $topic = Topic::create([
             'title' => $topicDto->title,
             'description' => $topicDto->description,
-            'user_id' => $user_id
+            'user_id' => $user->id
         ]);
-
         $topic->categories()->attach($topicDto->category_id);
+
+        dispatch(new SendTopicCreatedMail($user));
+        SendNewTopicNotificationEvent::dispatch($topic);
         return $topic;
     }
     public function update($id, TopicDto $topicDto)
