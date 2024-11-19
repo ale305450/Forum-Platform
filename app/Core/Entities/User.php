@@ -51,7 +51,10 @@ class User extends Authenticatable  implements HasMedia
             'password' => 'hashed',
         ];
     }
-
+    protected static function newFactory()
+    {
+        return \Database\Factories\UserFactory::new();
+    }
     public function getPictureAttribute()
     {
         return $this->getMedia();
